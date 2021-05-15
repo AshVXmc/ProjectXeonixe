@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProjectXeonixe:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjectXeonixe_jar</output-path>
+    <root id="archive" name="ProjectXeonixe.jar">
+      <element id="module-output" name="ProjectXeonixe" />
+    </root>
+  </artifact>
+</component>
