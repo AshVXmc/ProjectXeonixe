@@ -8,7 +8,7 @@ public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
 
     // 16:9 ratio window
-    public static int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+    public static final int WIDTH = 1080, HEIGHT = WIDTH / 12 * 9;
 
     private Thread thread;
     private boolean running = false;
@@ -19,6 +19,9 @@ public class Game extends Canvas implements Runnable {
     // Constructor
     public Game(){
         handler = new Handler();
+        // Keyboard input listener
+        this.addKeyListener(new KeyInput(handler));
+
         new Window(WIDTH, HEIGHT , "Project Xeonixe [Build 0.0.1]", this);
 
         Random random = new Random();
@@ -66,7 +69,7 @@ public class Game extends Canvas implements Runnable {
             // FPS Counter
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS: " + frames);
+              //System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }

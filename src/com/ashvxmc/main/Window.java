@@ -14,7 +14,7 @@ public class Window extends Canvas{
         jFrame.setMinimumSize(new Dimension(width,length));
 
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setResizable(true);
+        jFrame.setResizable(false);
         jFrame.setLocationRelativeTo(null);
 
         jFrame.add(game);
