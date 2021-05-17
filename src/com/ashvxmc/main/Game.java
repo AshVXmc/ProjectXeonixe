@@ -13,20 +13,17 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
 
-    private Random random = new Random();
-    private Handler handler;
+    private final Random random = new Random();
+    private final Handler handler;
 
     // Constructor
     public Game(){
-        new Window(WIDTH, HEIGHT , "Project Xeonixe [Build 0.0.1]", this);
         handler = new Handler();
+        new Window(WIDTH, HEIGHT , "Project Xeonixe [Build 0.0.1]", this);
 
-        int i;
-        for (i = 0; i < 50; i++){
-            handler.addObject(new Player(0,0,ID.Player));
-        }
+        Random random = new Random();
 
-
+        handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player));
     }
 
     public synchronized void start(){
