@@ -2,8 +2,9 @@ package com.ashvxmc.main;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
-public class Game extends Canvas {
+public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
 
     // 16:9 ratio window
@@ -12,13 +13,24 @@ public class Game extends Canvas {
     private Thread thread;
     private boolean running = false;
 
+    private Random random = new Random();
+    private Handler handler;
+
     // Constructor
     public Game(){
         new Window(WIDTH, HEIGHT , "Project Xeonixe [Build 0.0.1]", this);
+        handler = new Handler();
+
+        int i;
+        for (i = 0; i < 50; i++){
+            handler.addObject(new Player(0,0,ID.Player));
+        }
+
+
     }
 
     public synchronized void start(){
-        thread = new Thread((Runnable) this);
+        thread = new Thread(this);
         thread.start();
         running = true;
     }
@@ -32,9 +44,10 @@ public class Game extends Canvas {
         }
     }
 
+    @Override
     public void run(){
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0D;
+        double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
@@ -49,15 +62,14 @@ public class Game extends Canvas {
                 tick();
                 delta--;
             }
-            if (running) {
+            if (running)
                 render();
-                frames++;
-            }
+            frames++;
 
             // FPS Counter
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("Current FPS: " + frames);
+                System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }
@@ -65,19 +77,23 @@ public class Game extends Canvas {
     }
 
     private void tick(){
-
+        handler.tick();
     }
 
     private void render(){
         BufferStrategy bufferStrategy = this.getBufferStrategy();
         if (bufferStrategy == null){
             this.createBufferStrategy(3);
+            return;
         }
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
+
+        handler.render(graphics);
+
         graphics.dispose();
         bufferStrategy.show();
     }

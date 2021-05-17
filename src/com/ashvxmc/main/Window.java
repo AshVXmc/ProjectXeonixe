@@ -3,7 +3,7 @@ package com.ashvxmc.main;
 import javax.swing.*;
 import java.awt.*;
 
-public class Window extends Canvas {
+public class Window extends Canvas{
     private static final long serialVersionUID = 1L;
 
     public Window(int width, int length, String title, Game game){
@@ -19,7 +19,7 @@ public class Window extends Canvas {
 
         jFrame.add(game);
         jFrame.setVisible(true);
+
         game.start();
-        game.run();
     }
 }
